@@ -7,12 +7,14 @@ int main() {
 
     Face* cube;
     cube = create_rubiks(cube);
+    cube.free();
 
 
     cube[2].Tab_carre[2][1] = 0;
+    display_rubriks(cube);
     /*On initialise le cube*/
 
-    printf("%d", cube[2].Tab_carre[2][1]);
+    //printf("%d", cube[2].Tab_carre[2][1]);
     //1 +(rand()%14)
 
     /*1+(rand()%14);&nb aléatoire entre 1 et 14

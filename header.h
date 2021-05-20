@@ -16,3 +16,4 @@ typedef struct {
 int select_color(T_COLOR color);
 int side_to_index(T_SIDE side);
 Face* create_rubiks(Face* cube);
+void display_rubriks (Face* cube);

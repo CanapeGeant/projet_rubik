@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "header.h"
 #include "conio.h"
 
@@ -58,3 +59,37 @@ Face* create_rubiks(Face* cube){
         }
     }
 }*/
+
+void display_rubriks (Face* cube)
+{
+    for (int i = 0; i<3; i++)
+    {
+        printf("      ");
+        for (int j = 0; j<3; j++)
+        {
+            printf("%d", cube[0].Tab_carre[i][j]);
+        }
+        printf("\n");
+    }
+    for (int i=0; i<3; i++)
+    {
+        for (int x=1; x<4; x++)
+        {
+            printf("%d");
+            for (int j = 0; j<3; j++)
+            {
+                printf("%d", cube[x].Tab_carre[j][i]);
+            }
+        }
+        printf("\n");
+    }
+    for (int i = 0; i<3; i++)
+    {
+        printf("      ");
+        for (int j = 0; j<3; j++)
+        {
+            printf("%d", cube[0].Tab_carre[i][j]);
+        }
+        printf("\n");
+    }
+}
