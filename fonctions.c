@@ -32,7 +32,7 @@ int side_to_index(T_SIDE side){
     if (side == "DOWN")
         return 0;
 }
-
+/*azert*/
 
 char*** create_rubiks(char*** cube){
     cube = (char***) malloc(6* sizeof (char**));
