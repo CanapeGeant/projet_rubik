@@ -5,32 +5,17 @@
 
 int main() {
 
-
-
     Face* cube;
-    cube = (Face*) malloc(6*sizeof (Face));
-    for (int i = 0; i<6; i++){
-        cube[i].Tab_carre = (T_COLOR**) malloc(3 * sizeof (T_COLOR*));
-        for (int j = 0; j<3; j++){
-            cube[i].Tab_carre[j] = (T_COLOR*) malloc(3 * sizeof (T_COLOR));
-        }
-    }
-
-
-
+    cube = create_rubiks(cube);
 
 
     cube[2].Tab_carre[2][1] = 0;
     /*On initialise le cube*/
 
     printf("%d", cube[2].Tab_carre[2][1]);
+    //1 +(rand()%14)
 
-    1+(rand()%14);/*nb aléatoire entre 1 et 14*/
-
-    return 0;
-}
-
-/*
+    /*1+(rand()%14);&nb aléatoire entre 1 et 14
     c_textcolor(BLACK);
     printf("chips au poulet ");
     c_textcolor(BLUE);
@@ -64,6 +49,11 @@ int main() {
     c_textcolor(WHITE);
     printf(" Pourquoi les profs nous donnent tous les projet d'un coup ");
     c_textcolor(BLINK);
-    printf(" J'ai plus d'inspi pour le nom de cette couleur");*/
+    printf(" J'ai plus d'inspi pour le nom de cette couleur");
+*/
+    return 0;
+}
+
+
 
 

@@ -2,44 +2,45 @@
 #include "header.h"
 #include "conio.h"
 
-/*int select_color(char color){
-    if (color == 'R')
+int select_color(T_COLOR color){
+    if (color == R)
         return 4;
-    if (color=="B")
+    if (color==B)
         return 1;
-    if (color == 'G')
+    if (color == G)
         return 2;
-    if (color== 'O')
+    if (color== O)
         return 6;
-    if (color == 'Y')
+    if (color == Y)
         return 14;
-    if (color == 'W')
+    if (color == W)
         return 15;
 }
 
-*/
 int side_to_index(T_SIDE side){
-    if (side == "UP")
-        return 1;
-    if (side == "LEFT")
-        return 2;
-    if (side == "FRONT")
-        return 3;
-    if (side == "RIGHT")
-        return 4;
-    if (side == "BACK")
-        return 5;
-    if (side == "DOWN")
+    if (side == UP)
         return 0;
+    if (side == LEFT)
+        return 1;
+    if (side == FRONT)
+        return 2;
+    if (side == RIGHT)
+        return 3;
+    if (side == BACK)
+        return 4;
+    if (side == DOWN)
+        return 5;
 }
-/*azert*/
 
-char*** create_rubiks(char*** cube){
-    cube = (char***) malloc(6* sizeof (char**));
+
+Face* create_rubiks(Face* cube){
+
+    cube = (Face*) malloc(6*sizeof (Face));
     for (int i = 0; i<6; i++){
-        *(cube+i) = (char**) malloc(3*sizeof(char*));
-        for (int j = 0; j<3; j++)
-            *(*(cube + i)+j) = (char*) malloc(3*sizeof (char));
+        cube[i].Tab_carre = (T_COLOR**) malloc(3 * sizeof (T_COLOR*));
+        for (int j = 0; j<3; j++){
+            cube[i].Tab_carre[j] = (T_COLOR*) malloc(3 * sizeof (T_COLOR));
+        }
     }
     return cube;
 }
