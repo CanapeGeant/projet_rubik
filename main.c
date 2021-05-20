@@ -4,18 +4,26 @@
 #include <stdlib.h>
 
 int main() {
-    Test_tab* cube;
-    cube = (Test_tab*) malloc(6*sizeof (Test_tab));
+
+
+
+    Face* cube;
+    cube = (Face*) malloc(6*sizeof (Face));
     for (int i = 0; i<6; i++){
         cube[i].Tab_carre = (T_COLOR**) malloc(3 * sizeof (T_COLOR*));
         for (int j = 0; j<3; j++){
             cube[i].Tab_carre[j] = (T_COLOR*) malloc(3 * sizeof (T_COLOR));
         }
     }
-    cube[2].Tab_carre[2][1] = O;
+
+
+
+
+
+    cube[2].Tab_carre[2][1] = 0;
     /*On initialise le cube*/
 
-        printf("%d", cube[2].Tab_carre[2][1]);
+    printf("%d", cube[2].Tab_carre[2][1]);
 
     1+(rand()%14);/*nb aléatoire entre 1 et 14*/
 

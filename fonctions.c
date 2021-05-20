@@ -2,7 +2,7 @@
 #include "header.h"
 #include "conio.h"
 
-int select_color(char color){
+/*int select_color(char color){
     if (color == 'R')
         return 4;
     if (color=="B")
@@ -17,8 +17,8 @@ int select_color(char color){
         return 15;
 }
 
-
-int side_to_index(char side){
+*/
+int side_to_index(T_SIDE side){
     if (side == "UP")
         return 1;
     if (side == "LEFT")
@@ -30,7 +30,7 @@ int side_to_index(char side){
     if (side == "BACK")
         return 5;
     if (side == "DOWN")
-        return 6;
+        return 0;
 }
 
 
@@ -43,7 +43,7 @@ char*** create_rubiks(char*** cube){
     }
     return cube;
 }
-char *** init_rubiks(char*** cube){
+/*char *** init_rubiks(char*** cube){
     T_SIDE side;
     T_COLOR color;
     int ncolor;
@@ -56,4 +56,4 @@ char *** init_rubiks(char*** cube){
             }
         }
     }
-}
+}*/
