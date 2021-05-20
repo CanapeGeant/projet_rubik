@@ -7,17 +7,15 @@ int main() {
 
     Face* cube;
     cube = create_rubiks(cube);
-    cube.free();
-
-
-    cube[2].Tab_carre[2][1] = 0;
+    display_rubriks(cube);
+    cube = init_rubiks(&cube);
     display_rubriks(cube);
     /*On initialise le cube*/
 
     //printf("%d", cube[2].Tab_carre[2][1]);
     //1 +(rand()%14)
 
-    /*1+(rand()%14);&nb aléatoire entre 1 et 14
+    /*1+(rand()%14);&nb aléatoire entre 1 et 14*/
     c_textcolor(BLACK);
     printf("chips au poulet ");
     c_textcolor(BLUE);
@@ -52,7 +50,7 @@ int main() {
     printf(" Pourquoi les profs nous donnent tous les projet d'un coup ");
     c_textcolor(BLINK);
     printf(" J'ai plus d'inspi pour le nom de cette couleur");
-*/
+
     return 0;
 }
 
