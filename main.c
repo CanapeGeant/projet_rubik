@@ -4,11 +4,10 @@
 #include <stdlib.h>
 
 int main() {
-
     Face* cube;
     cube = create_rubiks(cube);
-    display_rubriks(cube);
-    cube = init_rubiks(&cube);
+    cube = blank_rubiks(cube);
+    init_rubiks(cube);
     display_rubriks(cube);
     /*On initialise le cube*/
 
