@@ -20,6 +20,23 @@ int select_color(T_COLOR color){
         return 7;
 }
 
+T_COLOR select_color_from_char(char color){
+    if (color == "R")
+        return R;
+    if (color == "B")
+        return B;
+    if (color == "G")
+        return G;
+    if (color== "O")
+        return O;
+    if (color == "Y")
+        return Y;
+    if (color == "W")
+        return W;
+    if (color == "LG")
+        return LG;
+}
+
 char select_color_lettre(T_COLOR color) {
     if (color == R)
         return "R";
@@ -84,6 +101,20 @@ char side_to_index_char(T_SIDE side){
         return "DOWN";
 }
 
+T_SIDE side_to_index_char_inv(char side){
+    if (side == "UP")
+        return UP;
+    if (side == "LEFT")
+        return LEFT;
+    if (side == "FRONT")
+        return FRONT;
+    if (side == "RIGHT")
+        return RIGHT;
+    if (side == "BACK")
+        return BACK;
+    if (side == "DOWN")
+        return DOWN;
+}
 
 
 Face* create_rubiks(Face* cube){
@@ -99,19 +130,7 @@ Face* create_rubiks(Face* cube){
     return cube;
 }
 
-Face* blank_rubiks(Face* cube)
-{
-    select_color(7);
-    for ( T_SIDE side = UP; side <= DOWN; side++) {
-        for (int i = 0; i<3; i++){
-            for (int j = 0; j < 3; j++){
-                c_textcolor(0);
-                cube[side].Tab_carre[i][j] = LG;
-            }
-        }
-    }
-    return cube;
-}
+
 
 Face* init_rubiks(Face* cube){
     for ( T_SIDE side = UP; side <= DOWN; side++ ) {
@@ -170,7 +189,7 @@ void display_rubriks (Face* cube)
         printf("       ");
         for (int j = 0; j<3; j++)
         {
-            display_letter(cube[0].Tab_carre[i][j]);
+            display_letter(cube[UP].Tab_carre[i][j]);
         }
         printf("\n");
     }
@@ -198,5 +217,238 @@ void display_rubriks (Face* cube)
         printf("\n");
     }
 }
+
+Face* blank_rubiks(Face* cube)
+{
+    select_color(7);
+    for ( T_SIDE side = UP; side <= DOWN; side++) {
+        for (int i = 0; i<3; i++){
+            for (int j = 0; j < 3; j++){
+                c_textcolor(0);
+                cube[side].Tab_carre[i][j] = LG;
+            }
+        }
+    }
+    return cube;
+}
+
+
+Face* fill_rubiks(Face* cube){
+    int a, color, cpt, c, l;
+    printf("Entrer le numero de la case a colorer (UP = 0 /LEFT = 1 /FRONT = 2 /RIGHT = 3 /BACK = 4 /DOWN = 5)");
+    scanf("%d", &a);
+    printf("Entrez le nom de la couleur (W = 0 /O = 1 /G = 2 /R = 3 /B = 4 /Y = 5)");
+    scanf("%d", &color);
+
+    for (T_SIDE side = UP; side <= DOWN; side++) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (cube[side].Tab_carre[i][j] == color) {
+                    cpt++;
+                }
+                if (cpt >= 9) {
+                    printf("Action impossible");
+                    return cube;
+                }
+            }
+        }
+    }
+
+    printf("Entrez le numéro de colonne");
+    scanf("%d", &c);
+    printf("Entrez le numéro de ligne");
+    scanf("%d", &l);
+
+    //---------------------------------
+    //Face UP
+
+    if (side_to_index_char_inv(a) == UP){
+        if (c == 0) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[LEFT].Tab_carre[l][0]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (c == 2) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[RIGHT].Tab_carre[2-l][0]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (l == 0){
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[BACK].Tab_carre[2-c][0]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (l == 2){
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[FRONT].Tab_carre[c][0]) {
+                    printf("Action impossible");
+                    return cube;
+                }
+            }
+        }
+
+    //---------------------------------
+    //Face LEFT
+
+    if (side_to_index_char_inv(a) == LEFT){
+        if (c == 0) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[BACK].Tab_carre[2][l]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (c == 2) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[FRONT].Tab_carre[0][l]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (l == 0) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[UP].Tab_carre[l][c]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (l == 2){
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[DOWN].Tab_carre[0][c]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+    }
+
+    //---------------------------------
+    //Face FRONT
+
+    if (side_to_index_char_inv(a) == FRONT){
+        if (c == 0) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[LEFT].Tab_carre[2][l]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (c == 2) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[RIGHT].Tab_carre[0][l]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (l == 0) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[UP].Tab_carre[c][2]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (l == 2){
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[DOWN].Tab_carre[c][0]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+    }
+
+    //---------------------------------
+    //Face RIGHT
+
+    if (side_to_index_char_inv(a) == RIGHT){
+        if (c == 0) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[FRONT].Tab_carre[2][l]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (c == 2) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[BACK].Tab_carre[0][l]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (l == 0) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[UP].Tab_carre[2-c][0]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (l == 2){
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[DOWN].Tab_carre[2][c]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+    }
+
+    //---------------------------------
+    //Face BACK
+
+    if (side_to_index_char_inv(a) == BACK){
+        if (c == 0) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[RIGHT].Tab_carre[2][l]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (c == 2) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[LEFT].Tab_carre[0][l]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (l == 0) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[UP].Tab_carre[2-c][0]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (l == 2){
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[DOWN].Tab_carre[2-c][2]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+    }
+
+    //---------------------------------
+    //Face DOWN
+
+    if (side_to_index_char_inv(a) == DOWN){
+        if (c == 0) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[LEFT].Tab_carre[2-c][2]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (c == 2) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[RIGHT].Tab_carre[l][2]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (l == 0) {
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[FRONT].Tab_carre[c][2]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+        if (l == 2){
+            if (cube[side_to_index_char_inv(a)].Tab_carre[c][l] == cube[UP].Tab_carre[c][0]) {
+                printf("Action impossible");
+                return cube;
+            }
+        }
+    }
+
+
+    //modification de la valeur
+    else{
+        cube[a].nom_side = a;
+        cube[a].Tab_carre[c][l] = color;
+        return cube;
+    }
+
+}
+
+
 
 

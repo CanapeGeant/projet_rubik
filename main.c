@@ -7,7 +7,9 @@ int main() {
     Face* cube;
     cube = create_rubiks(cube);
     cube = blank_rubiks(cube);
-    init_rubiks(cube);
+    //init_rubiks(cube);
+    cube = fill_rubiks(cube);
+    printf("aaaaaaaaaaahhhhhhhh");
     display_rubriks(cube);
     /*On initialise le cube*/
 
